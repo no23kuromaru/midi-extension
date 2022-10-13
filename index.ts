@@ -1,7 +1,7 @@
-const easymidi = require('easymidi');
-const prompts = require('prompts');
-const chord = require('./lib/chord');
+import * as easymidi from "easymidi";
+import * as chord from "./lib/chord";
 
+const prompts = require('prompts');
 const outputs = easymidi.getOutputs();
 const inputs = easymidi.getInputs();
 

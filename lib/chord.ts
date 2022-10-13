@@ -1,4 +1,10 @@
-const major = (note) => {
+import {Note} from "easymidi";
+
+/**
+ * create major chord
+ * @param note
+ */
+const major = (note: Note) => {
   return [4, 7].map((append) => {
     return {
       ...note,
@@ -7,6 +13,6 @@ const major = (note) => {
   });
 };
 
-module.exports = {
+export  {
   major
 }
