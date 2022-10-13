@@ -1,8 +1,9 @@
 const easymidi = require('easymidi');
+const prompts = require('prompts');
+const chord = require('./lib/chord');
+
 const outputs = easymidi.getOutputs();
 const inputs = easymidi.getInputs();
-
-const prompts = require('prompts');
 
 (async () => {
   const response = await prompts([
@@ -35,18 +36,19 @@ const prompts = require('prompts');
   const output = new easymidi.Output(response.output);
 
   input.on("noteon", (msg) => {
-    console.log(msg)
-
-    const send = {...msg};
-    send.note += 12;
-    output.send("noteon", send);
+    console.log(msg);
+    chord.major(msg).forEach((append) => {
+      console.log(append)
+      output.send("noteon", append);
+    });
   });
 
   input.on("noteoff", (msg) => {
     console.log(msg)
 
-    const send = {...msg};
-    send.note += 12;
-    output.send("noteoff", send);
+    chord.major(msg).forEach((append) => {
+      console.log(append)
+      output.send("noteoff", append);
+    });
   });
 })();
